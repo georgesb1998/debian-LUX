@@ -9,7 +9,6 @@
 # https://opensource.org/licenses/MIT
 #
 # To-do:
-#   Configure UFW firewall
 #   Configure GRUB bootloader
 #   Modify fastfetch .config file
 #   Modify tmux .config file
@@ -48,6 +47,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
         iputils-ping
         poppler-utils
         fastfetch
+        newsboat
+        elinks
         aptitude
         ranger
         neovim
@@ -78,7 +79,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
         "$TARGET_HOME/.config" \
         "$TARGET_HOME/.config/nvim" \
         "$TARGET_HOME/.config/fastfetch" \
-        "$TARGET_HOME/.config/tmux"
+        "$TARGET_HOME/.config/tmux" \
+        "$TARGET_HOME/.newsboat"
         }
 
     system_update() {
