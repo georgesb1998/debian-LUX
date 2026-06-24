@@ -102,11 +102,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     # Configure zsh
         usermod -s "$(command -v zsh)" "$TARGET_USER"
         install -o "$TARGET_USER" -g "$TARGET_USER" -m 644 \
-            "$SCRIPT_DIR/.zshrc" \
+            "$SCRIPT_DIR/dotfiles/.zshrc" \
             "$TARGET_HOME/.zshrc"
     # Configure neovim
         install -o "$TARGET_USER" -g "$TARGET_USER" -m 644 \
-            "$SCRIPT_DIR/init.vim" \
+            "$SCRIPT_DIR/dotfiles/init.vim" \
             "$TARGET_HOME/.config/nvim/init.vim"
     # Configure ufw firewall
         ufw default deny incoming
