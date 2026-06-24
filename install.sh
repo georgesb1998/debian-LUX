@@ -9,7 +9,6 @@
 # https://opensource.org/licenses/MIT
 #
 # To-do:
-#   Configure GRUB bootloader
 #   Modify fastfetch .config file
 #   Modify tmux .config file
 #   
@@ -120,6 +119,26 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
         sysctl --system
         }
 
+    system_grub() {
+    # Define variables
+        local timeout="0"
+        local grub_file="/etc/default/grub"
+    # GRUB_TIMEOUT configuration
+        if grep -q "^GRUB_TIMEOUT=" "$grub_file"; then
+            sed -i "s/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=$timeout/" "$grub_file"
+        else
+            echo "GRUB_TIMEOUT=$timeout" >> "$grub_file"
+        fi
+    # GRUB_TIMEOUT_STYLE configuration
+        if grep -q "^GRUB_TIMEOUT_STYLE=" "$grub_file"; then
+            sed -i "s/^GRUB_TIMEOUT_STYLE=.*/GRUB_TIMEOUT_STYLE=hidden/" "$grub_file"
+        else
+            echo "GRUB_TIMEOUT_STYLE=hidden" >> "$grub_file"
+        fi
+    # Apply changes
+        update-grub
+    }
+
     system_status() {
         echo;echo "The following major changes have been made: ";echo
         echo "    -> KDE Plasma desktop has been installed."
@@ -143,4 +162,5 @@ system_init
 system_update
 system_install
 system_setup
+system_grub
 system_status
